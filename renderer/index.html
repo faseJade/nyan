@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'" />
+    <title>Nyan</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+        user-select: none;
+      }
+      /* Placeholder until the real cat is drawn (the hard part, saved for last). */
+      #cat {
+        position: absolute;
+        left: 50px;
+        bottom: 10px;
+        width: 100px;
+        height: 90px;
+        background: #2a2a2a;
+        border-radius: 12px 12px 6px 6px;
+        transition: transform 0.15s;
+        cursor: grab;
+      }
+      #cat::before,
+      #cat::after {
+        content: "";
+        position: absolute;
+        top: -18px;
+        border: 14px solid transparent;
+        border-bottom: 18px solid #2a2a2a;
+      }
+      #cat::before { left: 4px; }
+      #cat::after { right: 4px; }
+      #bubble {
+        position: absolute;
+        left: 120px;
+        top: 30px;
+        padding: 2px 8px;
+        font: 16px/1.2 monospace;
+        background: #fff;
+        border: 2px solid #2a2a2a;
+        display: none;
+      }
+      body[data-agent="thinking"] #bubble,
+      body[data-agent="working"] #bubble { display: block; }
+      body[data-agent="attention"] #bubble { display: block; background: #ffd84d; }
+      body.key #cat { transform: translateY(3px); }
+      body.hop #cat { transform: translateY(-40px); transition: transform 0.18s ease-out; }
+    </style>
+  </head>
+  <body>
+    <div id="bubble">…</div>
+    <div id="cat"></div>
+    <script src="sounds.js"></script>
+    <script src="pet.js"></script>
+  </body>
+</html>

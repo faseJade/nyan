@@ -1,0 +1,36 @@
+{
+  "name": "nyan",
+  "productName": "Nyan",
+  "version": "0.1.0",
+  "description": "A pixel cat that lives on your desktop and reacts to your keyboard, mouse, and Claude Code.",
+  "license": "MIT",
+  "author": "Christian Philip",
+  "repository": "github:faseJade/nyan",
+  "main": "main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.js",
+    "dist": "electron-builder --win",
+    "release": "electron-builder --win --publish always",
+    "install-hooks": "node hooks/install-hooks.js",
+    "remove-hooks": "node hooks/install-hooks.js --remove"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "uiohook-napi": "^1.5.5"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "io.github.fasejade.nyan",
+    "productName": "Nyan",
+    "files": ["main/**", "shared/**", "renderer/**", "hooks/**", "preload.js", "package.json"],
+    "asarUnpack": ["node_modules/uiohook-napi/**"],
+    "npmRebuild": false,
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }], "artifactName": "Nyan-Setup-${version}.exe" },
+    "nsis": { "oneClick": true, "perMachine": false },
+    "publish": [{ "provider": "github", "owner": "faseJade", "repo": "nyan", "releaseType": "release" }]
+  }
+}
